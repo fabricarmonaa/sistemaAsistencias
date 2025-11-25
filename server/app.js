@@ -3,7 +3,8 @@ const session = require("express-session");
 const path = require("path");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
-const { db } = require("./database");
+const crypto = require("crypto");
+const { db, initializeSchema } = require("./database");
 const PDFGenerator = require("./pdf-generator");
 const searchService = require("./search-service");
 const { DateTime } = require("luxon");
@@ -11,6 +12,12 @@ const { DateTime } = require("luxon");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const pdfGenerator = new PDFGenerator();
+
+// Garantizar tablas clave al iniciar
+initializeSchema().catch((err) => {
+  console.error("No se pudo inicializar el esquema:", err);
+  process.exit(1);
+});
 
 // Middleware
 app.use(cors());
@@ -40,6 +47,14 @@ function requireAuth(req, res, next) {
   }
 }
 
+// Middleware explícito para rutas que solo aceptan PRECEPTORES autenticados
+function assertAuth(req, res, next) {
+  if (!req.session || !req.session.preceptor) {
+    return res.status(401).json({ error: "No autorizado", code: "AUTH_REQUIRED" });
+  }
+  return next();
+}
+
 // Rutas de autenticación
 app.post("/api/login", async (req, res) => {
   try {
@@ -59,15 +74,20 @@ app.post("/api/login", async (req, res) => {
       return res.status(401).json({ error: "Usuario no encontrado" });
     }
 
-    const passwordMatch = await bcrypt.compare(
-      contrasena,
-      preceptor.contrasena
-    );
+    const isHashed = preceptor.contrasena.startsWith("$2b$");
+    const passwordMatch = isHashed
+      ? await bcrypt.compare(contrasena, preceptor.contrasena)
+      : contrasena === preceptor.contrasena;
     console.log("passwordMatch:", passwordMatch);
 
     if (!passwordMatch) {
       console.log("Contraseña incorrecta");
       return res.status(401).json({ error: "Contraseña incorrecta" });
+    }
+
+    if (!isHashed) {
+      const newHash = await bcrypt.hash(contrasena, 10);
+      await db.updatePreceptorPassword(preceptor.id, newHash);
     }
 
     req.session.preceptor = {
@@ -87,6 +107,115 @@ app.post("/api/login", async (req, res) => {
     res
       .status(500)
       .json({ error: "Error interno del servidor", details: error.message });
+  }
+});
+
+// Registro de nuevos preceptores
+app.post("/api/register", async (req, res) => {
+  try {
+    const { usuario, email, telefono = null, contrasena } = req.body;
+    if (!usuario || !email || !contrasena) {
+      return res.status(400).json({ error: "Usuario, email y contraseña son requeridos" });
+    }
+
+    const existenteUsuario = await db.getPreceptorByUsuario(usuario);
+    if (existenteUsuario) {
+      return res.status(400).json({ error: "El usuario ya existe" });
+    }
+
+    const existenteEmail = await db.getPreceptorByEmail(email);
+    if (existenteEmail) {
+      return res.status(400).json({ error: "Ya hay un preceptor con ese email" });
+    }
+
+    const contrasenaHash = await bcrypt.hash(contrasena, 10);
+    const nuevo = await db.createPreceptor({ usuario, email, telefono, contrasenaHash });
+
+    req.session.preceptor = {
+      id: nuevo.id,
+      usuario: nuevo.usuario,
+      email: nuevo.email,
+    };
+
+    res.status(201).json({ success: true, preceptor: req.session.preceptor });
+  } catch (error) {
+    console.error("Error en /api/register:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
+// Cambio de contraseña autenticado
+app.post("/api/password/change", assertAuth, async (req, res) => {
+  try {
+    const { actual, nueva } = req.body;
+    if (!actual || !nueva) {
+      return res.status(400).json({ error: "Contraseñas requeridas" });
+    }
+
+    const preceptor = await db.getPreceptorById(req.session.preceptor.id);
+    if (!preceptor) return res.status(404).json({ error: "Preceptor no encontrado" });
+
+    const match = await bcrypt.compare(actual, preceptor.contrasena);
+    if (!match) return res.status(401).json({ error: "Contraseña actual incorrecta" });
+
+    const hash = await bcrypt.hash(nueva, 10);
+    await db.updatePreceptorPassword(preceptor.id, hash);
+
+    res.json({ success: true, message: "Contraseña actualizada" });
+  } catch (error) {
+    console.error("Error en /api/password/change:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
+// Solicitud de reseteo de contraseña
+app.post("/api/password/forgot", async (req, res) => {
+  try {
+    const { usuario, email } = req.body;
+    if (!usuario && !email) {
+      return res.status(400).json({ error: "Debe enviar usuario o email" });
+    }
+
+    const preceptor = usuario
+      ? await db.getPreceptorByUsuario(usuario)
+      : await db.getPreceptorByEmail(email);
+
+    if (!preceptor) return res.status(404).json({ error: "Preceptor no encontrado" });
+
+    const token = crypto.randomBytes(32).toString("hex");
+    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+    const expiresAt = DateTime.now().plus({ hours: 1 }).toJSDate();
+
+    await db.saveResetToken(preceptor.id, tokenHash, expiresAt);
+
+    res.json({ success: true, message: "Token generado", token, expiresAt });
+  } catch (error) {
+    console.error("Error en /api/password/forgot:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
+// Reseteo con token
+app.post("/api/password/reset", async (req, res) => {
+  try {
+    const { token, nueva } = req.body;
+    if (!token || !nueva) return res.status(400).json({ error: "Datos incompletos" });
+
+    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+    const stored = await db.findResetToken(tokenHash);
+    if (!stored) return res.status(400).json({ error: "Token inválido o vencido" });
+
+    const preceptor = await db.getPreceptorById(stored.preceptorID);
+    if (!preceptor) return res.status(404).json({ error: "Preceptor no encontrado" });
+
+    const hash = await bcrypt.hash(nueva, 10);
+    await db.updatePreceptorPassword(preceptor.id, hash);
+    await db.deleteResetToken(stored.id);
+
+    res.json({ success: true, message: "Contraseña restablecida" });
+  } catch (error) {
+    console.error("Error en /api/password/reset:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 });
 
@@ -156,15 +285,15 @@ app.get("/api/alumno/:dni", requireAuth, async (req, res) => {
   }
 });
 
-app.put("/api/asistencia", requireAuth, async (req, res) => {
+app.put("/api/asistencia", assertAuth, async (req, res) => {
   try {
-    const { alumnoDNI, tipoAsistencia, curso } = req.body;
+    const { alumnoDNI, tipoAsistencia, curso, comentario = null } = req.body;
     if (!alumnoDNI || !tipoAsistencia || !curso) {
       return res.status(400).json({ error: "Datos incompletos" });
     }
     const preceptorID = req.session.preceptor?.id || null;
 
-    await db.updateAsistencia(alumnoDNI, tipoAsistencia, Number(curso), preceptorID);
+    await db.updateAsistencia(alumnoDNI, tipoAsistencia, Number(curso), preceptorID, comentario);
     res.json({ success: true, message: "Asistencia actualizada" });
   } catch (error) {
     const status = error.statusCode || 500;
@@ -173,7 +302,7 @@ app.put("/api/asistencia", requireAuth, async (req, res) => {
 });
 
 
-app.post("/api/clase", requireAuth, async (req, res) => {
+app.post("/api/clase", assertAuth, async (req, res) => {
   try {
     const { fecha, cursoID, claseInfo, comentarios } = req.body;
 
@@ -414,6 +543,18 @@ app.get("/", (req, res) => {
 
 app.get("/login.html", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/login.html"));
+});
+
+app.get("/register", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/register.html"));
+});
+
+app.get("/forgot", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/forgot.html"));
+});
+
+app.get("/reset", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/reset.html"));
 });
 
 app.get("/dashboard", (req, res) => {

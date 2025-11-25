@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer contraseña - Sistema de Asistencias</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="main">
+        <div class="contenedor-formulario">
+            <div class="formulario">
+                <div class="titulo">
+                    <h2>Restablecer <span>contraseña</span></h2>
+                </div>
+
+                <h3>Ingresá tu token</h3>
+
+                <form id="resetForm">
+                    <div class="section">
+                        <label for="token">Token:</label>
+                        <input type="text" id="token" name="token" placeholder="Token recibido" required>
+                    </div>
+
+                    <div class="section">
+                        <label for="nueva">Nueva contraseña:</label>
+                        <input type="password" id="nueva" name="nueva" placeholder="Nueva contraseña" required>
+                    </div>
+
+                    <button type="submit">Actualizar contraseña</button>
+                </form>
+
+                <div id="mensaje" class="mensaje" style="display: none;"></div>
+                <p style="margin-top: 1rem;">¿No tenés token? <a href="/forgot">Solicitalo</a></p>
+                <p style="margin-top: 0.5rem;">¿Recordaste tu clave? <a href="/login.html">Volver al login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/reset.js"></script>
+</body>
+</html>

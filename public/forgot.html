@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar contraseña - Sistema de Asistencias</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="main">
+        <div class="contenedor-formulario">
+            <div class="formulario">
+                <div class="titulo">
+                    <h2>Recuperar <span>contraseña</span></h2>
+                </div>
+
+                <h3>Generar token</h3>
+
+                <form id="forgotForm">
+                    <div class="section">
+                        <label for="usuario">Usuario (o email):</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Usuario o email" required>
+                    </div>
+
+                    <button type="submit">Solicitar token</button>
+                </form>
+
+                <div id="mensaje" class="mensaje" style="display: none;"></div>
+                <p style="margin-top: 1rem;">¿Ya tenés tu token? <a href="/reset">Restablecelo</a></p>
+                <p style="margin-top: 0.5rem;">¿Recordaste tu clave? <a href="/login.html">Volver al login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/forgot.js"></script>
+</body>
+</html>
