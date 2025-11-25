@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencias - Dashboard</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="header">
+        <div class="title">
+            <h1>Sistema de <span>Asistencias</span></h1>
+        </div>
+        <div class="user-info">
+            <span id="usuarioNombre">Preceptor</span>
+            <a href="/busqueda" class="search-btn">🔍 Búsqueda Avanzada</a>
+            <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div class="container-filter">
+        <div class="filtro">
+            <input type="text" id="buscarCurso" placeholder="Buscar curso o división...">
+            <div class="filtro-boton">
+                <button id="filtroTodos" class="filtro-activo">Todos</button>
+            </div>
+            <div class="filtro-boton">
+                <button id="filtroBasico">Ciclo Básico</button>
+            </div>
+            <div class="filtro-boton">
+                <button id="filtroSuperior">Ciclo Superior</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main" id="cursosContainer">
+        <!-- Los cursos se cargarán dinámicamente aquí -->
+        <div class="loading">Cargando cursos...</div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

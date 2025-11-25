@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencias - Perfil del Alumno</title>
+    <link rel="stylesheet" href="/css/alumno.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Perfil del Alumno</h2>
+        <div class="nav-buttons">
+            <a href="/dashboard">Dashboard</a>
+            <button id="volverCursoBtn">Volver al Curso</button>
+        </div>
+    </div>
+
+    <div id="mensajes"></div>
+
+    <div class="main" id="mainContent">
+        <div class="loading">Cargando información del alumno...</div>
+    </div>
+
+    <!-- Modal para agregar excepciones -->
+    <div id="excepcionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agregar Excepción</h3>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <form id="excepcionForm">
+                <div class="form-group">
+                    <label for="tipoExcepcion">Tipo de Excepción:</label>
+                    <select id="tipoExcepcion" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="Inasistencia">Inasistencia</option>
+                        <option value="Llegada tarde">Llegada tarde</option>
+                        <option value="Retirado">Retirado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaExcepcion">Fecha:</label>
+                    <input type="date" id="fechaExcepcion" required>
+                </div>
+                <div class="form-group">
+                    <label for="horaExcepcion">Hora (opcional):</label>
+                    <input type="time" id="horaExcepcion">
+                </div>
+                <div class="form-group">
+                    <label for="cantidadFalta">Cantidad de Falta:</label>
+                    <select id="cantidadFalta">
+                        <option value="1.00">Falta completa (1.00)</option>
+                        <option value="0.50">Media falta (0.50)</option>
+                        <option value="0.25">Un cuarto (0.25)</option>
+                    </select>
+                </div>
+                <div class="acciones-container">
+                    <button type="submit" class="accion-btn success">Guardar Excepción</button>
+                    <button type="button" class="accion-btn" id="cancelarModal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/alumno.js"></script>
+</body>
+</html>

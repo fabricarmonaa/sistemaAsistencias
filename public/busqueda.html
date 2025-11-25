@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencias - Búsqueda Avanzada</title>
+    <link rel="stylesheet" href="css/busqueda.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Búsqueda Avanzada</h2>
+        <div class="nav-buttons">
+            <a href="/dashboard">Dashboard</a>
+            <button id="limpiarBtn">Limpiar Filtros</button>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-form">
+            <h3>Filtros de Búsqueda</h3>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="busquedaTexto">Búsqueda General:</label>
+                    <input type="text" id="busquedaTexto" placeholder="Nombre, apellido o DNI...">
+                </div>
+
+                <div class="form-group">
+                    <label for="filtroCurso">Curso:</label>
+                    <select id="filtroCurso">
+                        <option value="">Todos los cursos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="filtroEstado">Estado de Asistencia:</label>
+                    <select id="filtroEstado">
+                        <option value="">Todos los estados</option>
+                        <option value="Presente">Presente</option>
+                        <option value="Ausente">Ausente</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Retirado">Retirado</option>
+                        <option value="Falta justificada">Falta justificada</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="minAsistencia">% Mínimo de Asistencia:</label>
+                    <input type="number" id="minAsistencia" min="0" max="100" placeholder="85">
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaDesde">Desde:</label>
+                    <input type="date" id="fechaDesde">
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaHasta">Hasta:</label>
+                    <input type="date" id="fechaHasta">
+                </div>
+            </div>
+
+            <div class="search-actions">
+                <button id="buscarBtn" class="btn-primary">Buscar</button>
+                <button id="exportarResultadosBtn" class="btn-secondary">Exportar Resultados</button>
+            </div>
+        </div>
+
+        <div class="estadisticas-generales">
+            <h3>Estadísticas Generales</h3>
+            <div class="stats-grid" id="statsContainer">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalAlumnos">-</div>
+                    <div class="stat-label">Total Alumnos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCursos">-</div>
+                    <div class="stat-label">Total Cursos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="promedioAsistencia">-</div>
+                    <div class="stat-label">% Promedio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="bajaAsistencia">-</div>
+                    <div class="stat-label">Baja Asistencia</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="results-container">
+        <div class="results-header">
+            <h3>Resultados de Búsqueda</h3>
+            <div class="results-count" id="resultsCount">0 resultados</div>
+        </div>
+        
+        <div class="results-grid" id="resultsContainer">
+            <div class="no-results">Utilice los filtros para buscar alumnos</div>
+        </div>
+    </div>
+
+    <script src="js/busqueda.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "sistema-asistencias",
+  "version": "1.0.0",
+  "description": "Sistema de gestión de asistencias escolares",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js",
+    "setup": "npm install && echo 'Instalación completa. Configura tu base de datos y ejecuta: npm run dev'"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "handlebars": "^4.7.8",
+    "luxon": "^3.7.2",
+    "mysql2": "^3.6.0",
+    "package.json": "^2.0.1",
+    "puppeteer": "^24.27.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "asistencias",
+    "escuela",
+    "preceptores",
+    "estudiantes"
+  ],
+  "author": "Sistema Asistencias",
+  "license": "MIT"
+}

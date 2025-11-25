@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencias - Lista de Alumnos</title>
+    <!-- Changed relative path to absolute path -->
+    <link rel="stylesheet" href="/css/alumnos-lista.css">
+</head>
+<body>
+    <div class="header">
+        <h2 id="tituloLista">Lista de Alumnos</h2>
+        <a href="/dashboard">← Volver al Dashboard</a>
+    </div>
+
+    <div class="filtros">
+        <input type="text" id="buscarAlumno" placeholder="Buscar alumno por nombre, apellido o DNI...">
+    </div>
+
+    <div class="main" id="alumnosContainer">
+        <div class="no-alumnos">Cargando alumnos...</div>
+    </div>
+
+    <!-- Changed relative path to absolute path -->
+    <script src="/js/alumnos-lista.js"></script>
+</body>
+</html>

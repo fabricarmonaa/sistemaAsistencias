@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencias - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="main">
+        <div class="contenedor-formulario">
+            <div class="formulario">
+                <div class="titulo">
+                    <h2>Sistema de <span>Asistencias</span></h2>
+                </div>
+                
+                <h3>Iniciar Sesión</h3>
+                
+                <form id="loginForm">
+                    <div class="section">
+                        <label for="usuario">Usuario:</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
+                    </div>
+                    
+                    <div class="section">
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
+                    </div>
+                    
+                    <button type="submit">Ingresar</button>
+                </form>
+                
+                <div id="mensaje" class="mensaje" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

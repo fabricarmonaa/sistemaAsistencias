@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencias - Curso</title>
+    <!-- Changed relative path to absolute path to fix MIME type errors -->
+    <link rel="stylesheet" href="/css/curso.css">
+</head>
+<body>
+    <div class="menu">
+        <h1>Asistencias</h1>
+        
+        <div class="info-curso">
+            <h3 id="cursoNombre">Cargando...</h3>
+            <p id="cursoDivision">División: -</p>
+            <p id="cursoFecha">Fecha: <span id="fechaActual"></span></p>
+        </div>
+
+        <div class="menu-section">
+            <h4>Navegación</h4>
+            <a href="/dashboard">← Volver al Dashboard</a>
+            <button id="verAlumnosBtn">Ver Lista de Alumnos</button>
+        </div>
+
+        <div class="menu-section">
+            <h4>Acciones</h4>
+            <button id="guardarAsistenciasBtn">Guardar Asistencias</button>
+            <button id="exportarPDFBtn">Exportar PDF</button>
+        </div>
+
+        <div class="menu-section">
+            <h4>Historial</h4>
+            <button id="verHistorialBtn">Ver Historial</button>
+            <button id="buscarAlumnoBtn">Buscar Alumno</button>
+        </div>
+    </div>
+
+    <div class="contenido">
+        <div class="contenido-header">
+            <h2 id="tituloContenido">Gestión de Asistencias</h2>
+            <div class="fecha-selector">
+                <label for="fechaClase">Fecha:</label>
+                <input type="date" id="fechaClase">
+                <button id="cargarFechaBtn">Cargar</button>
+            </div>
+        </div>
+
+        <div id="mensajes"></div>
+
+        <div class="clase-info">
+            <h3>Información de la Clase</h3>
+            <div class="clase-info-grid">
+                <div class="clase-info-item">
+                    <label for="estadoClase">Estado de la Clase:</label>
+                    <select id="estadoClase">
+                        <option value="Hubo clase">Hubo clase</option>
+                        <option value="Faltó profesor">Faltó profesor</option>
+                        <option value="No hay profesor asignado">No hay profesor asignado</option>
+                        <option value="Hubo paro">Hubo paro</option>
+                        <option value="No hubo alumnos">No hubo alumnos</option>
+                        <option value="Salidas educativas">Salidas educativas</option>
+                        <option value="Eventos educativos">Eventos educativos (Actos)</option>
+                    </select>
+                </div>
+                <div class="clase-info-item">
+                    <label for="turnoClase">Turno:</label>
+                    <select id="turnoClase">
+                        <option value="Mañana">Mañana</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Vespertino">Vespertino</option>
+                    </select>
+                </div>
+                <div class="clase-info-item">
+                    <label for="comentarios">Comentarios:</label>
+                    <input type="text" id="comentarios" placeholder="Observaciones del día...">
+                </div>
+            </div>
+            <button class="guardar-clase-btn" id="guardarClaseBtn">Guardar Información de Clase</button>
+        </div>
+
+        <div class="asistencias">
+            <div class="asistencias-header">
+                <h3>Lista de Asistencias</h3>
+                <div class="acciones-rapidas">
+                    <button id="marcarTodosPresentes">Todos Presentes</button>
+                    <button id="marcarTodosAusentes">Todos Ausentes</button>
+                    <button id="limpiarAsistencias">Limpiar</button>
+                </div>
+            </div>
+            
+            <div class="asistencias-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Apellido y Nombre</th>
+                            <th>DNI</th>
+                            <th>Estado</th>
+                            <th>Asistencias</th>
+                            <th>% Asistencia</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaAsistencias">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 40px;">
+                                Cargando alumnos...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="estadisticas">
+            <div class="estadistica-item">
+                <div class="estadistica-numero" id="totalAlumnos">0</div>
+                <div class="estadistica-label">Total Alumnos</div>
+            </div>
+            <div class="estadistica-item">
+                <div class="estadistica-numero" id="totalPresentes">0</div>
+                <div class="estadistica-label">Presentes</div>
+            </div>
+            <div class="estadistica-item">
+                <div class="estadistica-numero" id="totalAusentes">0</div>
+                <div class="estadistica-label">Ausentes</div>
+            </div>
+            <div class="estadistica-item">
+                <div class="estadistica-numero" id="totalTardes">0</div>
+                <div class="estadistica-label">Llegadas Tarde</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Changed relative path to absolute path to fix 404 errors -->
+    <script src="/js/curso.js"></script>
+</body>
+</html>
