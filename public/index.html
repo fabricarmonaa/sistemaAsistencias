@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Asistencias - Dashboard</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/index.css"><link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.0/uicons-solid-rounded/css/uicons-solid-rounded.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="header">
@@ -13,29 +17,30 @@
         </div>
         <div class="user-info">
             <span id="usuarioNombre">Preceptor</span>
-            <a href="/busqueda" class="search-btn">🔍 Búsqueda Avanzada</a>
-            <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+            <a href="/busqueda" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Búsqueda Avanzada</a>
+            <button id="logoutBtn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</button>
         </div>
     </div>
-
-    <div class="container-filter">
-        <div class="filtro">
-            <input type="text" id="buscarCurso" placeholder="Buscar curso o división...">
-            <div class="filtro-boton">
-                <button id="filtroTodos" class="filtro-activo">Todos</button>
-            </div>
-            <div class="filtro-boton">
-                <button id="filtroBasico">Ciclo Básico</button>
-            </div>
-            <div class="filtro-boton">
-                <button id="filtroSuperior">Ciclo Superior</button>
+    <div class="main-container">
+        <div class="container-filter">
+            <div class="filtro">
+                <input type="text" id="buscarCurso" placeholder="Buscar curso o división...">
+                <div class="filtro-boton">
+                    <button id="filtroTodos" class="filtro-activo">Todos</button>
+                </div>
+                <div class="filtro-boton">
+                    <button id="filtroBasico">Ciclo Básico</button>
+                </div>
+                <div class="filtro-boton">
+                    <button id="filtroSuperior">Ciclo Superior</button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="main" id="cursosContainer">
-        <!-- Los cursos se cargarán dinámicamente aquí -->
-        <div class="loading">Cargando cursos...</div>
+    
+        <div class="main" id="cursosContainer">
+            <!-- Los cursos se cargarán dinámicamente aquí -->
+            <div class="loading">Cargando cursos...</div>
+        </div>
     </div>
 
     <script src="js/dashboard.js"></script>

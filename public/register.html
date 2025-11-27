@@ -3,49 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarse - Sistema de Asistencias</title>
-    <link rel="stylesheet" href="css/login.css">
+    <title>Registro - Sistema de Asistencias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="stylesheet" href="css/auth-material.css">
 </head>
 <body>
     <div class="main">
-        <div class="contenedor-formulario">
-            <div class="formulario">
-                <div class="titulo">
-                    <h2>Crear cuenta de <span>Preceptor</span></h2>
+        <div class="auth-card">
+            <header class="auth-header">
+                <span class="material-icons auth-icon">person_add</span>
+                <div class="auth-title">
+                    <h2>Registrarse <span>preceptor</span></h2>
+                    <p class="subtitle">Crea tu cuenta</p>
+                </div>
+            </header>
+
+            <form id="registerForm" class="auth-form" novalidate>
+                <div class="input-group">
+                    <span class="material-icons input-icon">person</span>
+                    <input type="text" id="usuario" name="usuario" required placeholder=" ">
+                    <label for="usuario">Usuario (DNI)</label>
                 </div>
 
-                <h3>Registro</h3>
+                <div class="input-group">
+                    <span class="material-icons input-icon">email</span>
+                    <input type="email" id="email" name="email" required placeholder=" ">
+                    <label for="email">Email</label>
+                </div>
 
-                <form id="registerForm">
-                    <div class="section">
-                        <label for="usuario">Usuario:</label>
-                        <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
-                    </div>
+                <div class="input-group">
+                    <span class="material-icons input-icon">phone</span>
+                    <input type="text" id="telefono" name="telefono" required placeholder=" ">
+                    <label for="telefono">Teléfono</label>
+                </div>
 
-                    <div class="section">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="correo@colegio.com" required>
-                    </div>
+                <div class="input-group">
+                    <span class="material-icons input-icon">lock</span>
+                    <input type="password" id="contrasena" name="contrasena" required placeholder=" ">
+                    <label for="contrasena">Contraseña</label>
+                </div>
 
-                    <div class="section">
-                        <label for="telefono">Teléfono:</label>
-                        <input type="text" id="telefono" name="telefono" placeholder="Opcional">
-                    </div>
+                <button type="submit" class="btn-primary">Registrarse</button>
+                <div id="mensaje" class="mensaje" aria-live="polite" style="display: none;"></div>
 
-                    <div class="section">
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" id="contrasena" name="contrasena" placeholder="Mínimo 8 caracteres" required>
-                    </div>
-
-                    <button type="submit">Crear cuenta</button>
-                </form>
-
-                <div id="mensaje" class="mensaje" style="display: none;"></div>
-                <p style="margin-top: 1rem;">¿Ya tenés usuario? <a href="/login.html">Iniciá sesión</a></p>
-            </div>
+                <div class="aux-links">
+                    <a href="/login.html">Ya tengo cuenta</a>
+                </div>
+            </form>
         </div>
     </div>
 
     <script src="js/register.js"></script>
+</body>
+</html>
 </body>
 </html>

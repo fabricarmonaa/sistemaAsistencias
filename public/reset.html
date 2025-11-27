@@ -4,36 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restablecer contraseña - Sistema de Asistencias</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="stylesheet" href="css/auth-material.css">
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer contraseña - Sistema de Asistencias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="stylesheet" href="css/auth-material.css">
 </head>
 <body>
     <div class="main">
-        <div class="contenedor-formulario">
-            <div class="formulario">
-                <div class="titulo">
+        <div class="auth-card">
+            <header class="auth-header">
+                <span class="material-icons auth-icon">verified_user</span>
+                <div class="auth-title">
                     <h2>Restablecer <span>contraseña</span></h2>
+                    <p class="subtitle">Ingresá tu token</p>
+                </div>
+            </header>
+
+            <form id="resetForm" class="auth-form" novalidate>
+                <div class="input-group">
+                    <span class="material-icons input-icon">vpn_key</span>
+                    <input type="text" id="token" name="token" required placeholder=" ">
+                    <label for="token">Token</label>
                 </div>
 
-                <h3>Ingresá tu token</h3>
+                <div class="input-group">
+                    <span class="material-icons input-icon">lock</span>
+                    <input type="password" id="nueva" name="nueva" required placeholder=" ">
+                    <label for="nueva">Nueva contraseña</label>
+                </div>
 
-                <form id="resetForm">
-                    <div class="section">
-                        <label for="token">Token:</label>
-                        <input type="text" id="token" name="token" placeholder="Token recibido" required>
-                    </div>
+                <button type="submit" class="btn-primary">Actualizar contraseña</button>
+                <div id="mensaje" class="mensaje" aria-live="polite" style="display: none;"></div>
 
-                    <div class="section">
-                        <label for="nueva">Nueva contraseña:</label>
-                        <input type="password" id="nueva" name="nueva" placeholder="Nueva contraseña" required>
-                    </div>
-
-                    <button type="submit">Actualizar contraseña</button>
-                </form>
-
-                <div id="mensaje" class="mensaje" style="display: none;"></div>
-                <p style="margin-top: 1rem;">¿No tenés token? <a href="/forgot">Solicitalo</a></p>
-                <p style="margin-top: 0.5rem;">¿Recordaste tu clave? <a href="/login.html">Volver al login</a></p>
-            </div>
+                <div class="aux-links">
+                    <a href="/forgot">¿No tenés token? Solicitalo</a>
+                    <a href="/login.html">¿Recordaste tu clave? Volver al login</a>
+                </div>
+            </form>
         </div>
     </div>
 

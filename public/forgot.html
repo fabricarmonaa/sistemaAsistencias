@@ -4,31 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contraseña - Sistema de Asistencias</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="stylesheet" href="css/auth-material.css">
 </head>
 <body>
     <div class="main">
-        <div class="contenedor-formulario">
-            <div class="formulario">
-                <div class="titulo">
+        <div class="auth-card">
+            <header class="auth-header">
+                <span class="material-icons auth-icon">mail</span>
+                <div class="auth-title">
                     <h2>Recuperar <span>contraseña</span></h2>
+                    <p class="subtitle">Generar token</p>
+                </div>
+            </header>
+
+            <form id="forgotForm" class="auth-form" novalidate>
+                <div class="input-group">
+                    <span class="material-icons input-icon">person</span>
+                    <input type="text" id="usuario" name="usuario" placeholder=" " required autocomplete="username">
+                    <label for="usuario">Usuario (o email)</label>
                 </div>
 
-                <h3>Generar token</h3>
+                <button type="submit" class="btn-primary">Solicitar token</button>
 
-                <form id="forgotForm">
-                    <div class="section">
-                        <label for="usuario">Usuario (o email):</label>
-                        <input type="text" id="usuario" name="usuario" placeholder="Usuario o email" required>
-                    </div>
+                <form id="forgotForm" class="auth-form" novalidate>
 
-                    <button type="submit">Solicitar token</button>
-                </form>
-
-                <div id="mensaje" class="mensaje" style="display: none;"></div>
-                <p style="margin-top: 1rem;">¿Ya tenés tu token? <a href="/reset">Restablecelo</a></p>
-                <p style="margin-top: 0.5rem;">¿Recordaste tu clave? <a href="/login.html">Volver al login</a></p>
-            </div>
+                <div class="aux-links">
+                    <a href="/reset">¿Ya tenés tu token? Restablecelo</a>
+                    <a href="/login.html">¿Recordaste tu clave? Volver al login</a>
+                </div>
+            </form>
         </div>
     </div>
 

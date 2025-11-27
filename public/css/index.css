@@ -1,5 +1,5 @@
 :root {
-  --color-primario: #009ee7;
+  --color-primario: #007bff;
   --color-secundario: #00405e;
   --color-text: #383838;
   --color-terciario: #00ff37;
@@ -31,7 +31,7 @@ body {
 .header {
   height: 10vh;
   width: 100%;
-  background-color: var(--color-primario);
+  background-color: #007bff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -101,15 +101,18 @@ body {
   max-width: 100px;
 }
 
+.main-container{
+  padding: 2vh;
+}
+
 .main {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive */
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .informacion {
+  position: relative;
   padding: 2vh;
   background-color: #ffffff;
   border-radius: 5px;
@@ -134,11 +137,29 @@ body {
   margin: 5px 0;
 }
 
+
+.informacion .curso-icon {
+  position: absolute;
+  right: 16px;
+  color: #007bff83;
+  font-size: 8vh;
+  line-height: 1;
+  z-index: 2;
+}
+
+@media (max-width: 520px) {
+  .informacion .curso-icon {
+    position: static;
+    display: inline-block;
+    margin-top: 8px;
+    float: right;
+  }
+}
+
 .main button {
   position: relative;
   width: 100%;
-  margin-top: 5vh;
-  padding: 1vh 10vh;
+  padding: 1vh 5vh;
   border: none;
   border-radius: 5px;
   background-color: #007bff;
@@ -154,8 +175,6 @@ body {
 
 .container-filter {
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 50%;
   background-color: var(--color-fondo);
   padding: 1vh;
@@ -165,10 +184,8 @@ body {
 .filtro {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 10px;
   max-height: none;
-  margin: 2vh 0;
   width: 100%;
 }
 
@@ -191,7 +208,7 @@ body {
   color: white;
   padding: 10px 20px;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,8 +268,6 @@ body {
 
   .container-filter {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     gap: 10px;
   }
