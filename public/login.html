@@ -4,34 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Asistencias - Login</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="stylesheet" href="css/auth-material.css">
 </head>
 <body>
     <div class="main">
-        <div class="contenedor-formulario">
-            <div class="formulario">
-                <div class="titulo">
-                    <h2>Sistema de <span>Asistencias</span></h2>
-                </div>
-                
-                <h3>Iniciar Sesión</h3>
-                
-                <form id="loginForm">
-                    <div class="section">
-                        <label for="usuario">Usuario:</label>
-                        <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
-                    </div>
-                    
-                    <div class="section">
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
-                    </div>
-                    
-                    <button type="submit">Ingresar</button>
-                </form>
-                
-                <div id="mensaje" class="mensaje" style="display: none;"></div>
+        <div class="auth-card">
+            <div class="brand-logo">
+                <div class="logo-mark">SA</div>
+                <div class="brand-text">Sistema de Asistencias</div>
             </div>
+            <header class="auth-header">
+                <span class="material-icons auth-icon">badge</span>
+                <div class="auth-title">
+                    <h2>Sistema de <span>Asistencias</span></h2>
+                    <p class="subtitle">Iniciar sesión</p>
+                </div>
+            </header>
+
+            <form id="loginForm" class="auth-form" novalidate>
+                <div class="input-group">
+                    <span class="material-icons input-icon">person</span>
+                    <input type="text" id="usuario" name="usuario" required autocomplete="username" placeholder=" ">
+                    <label for="usuario">Usuario</label>
+                </div>
+
+                <div class="input-group">
+                    <span class="material-icons input-icon">lock</span>
+                    <input type="password" id="contrasena" name="contrasena" required autocomplete="current-password" placeholder=" ">
+                    <label for="contrasena">Contraseña</label>
+                </div>
+
+                <button type="submit" class="btn-primary">Ingresar</button>
+                <div id="mensaje" class="mensaje" aria-live="polite" style="display: none;"></div>
+
+                <div class="aux-links">
+                    <a href="/register">¿No tenés cuenta? Registrate</a>
+                    <div class="forgot-link"><a href="/forgot">¿Olvidaste tu contraseña?</a></div>
+                </div>
+            </form>
         </div>
     </div>
 

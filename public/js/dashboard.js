@@ -99,15 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const numeroCurso = Number.parseInt(curso.curso);
       const ciclo = numeroCurso <= 3 ? "Básico" : "Superior";
 
-      cursoElement.innerHTML = `
-                <h2>${curso.curso}</h2>
-                <div class="informacion-curso">
-                    <p><strong>División:</strong> ${curso.division}</p>
-                    <p><strong>Ciclo:</strong> ${ciclo}</p>
-                    <p><strong>Código:</strong> ${curso.cursoID}</p>
-                </div>
-                <button onclick="verCurso(${curso.cursoID})">Ver Asistencias</button>
-            `;
+        cursoElement.innerHTML = `
+            <h2>${curso.curso}</h2>
+            <div class="informacion-curso">
+              <p><strong>División:</strong> ${curso.division}</p>
+              <p><strong>Ciclo:</strong> ${ciclo}</p>
+              <p><strong>Código:</strong> ${curso.cursoID}</p>
+            </div>
+            <i class="fa-solid fa-book-open curso-icon" aria-hidden="true"></i>
+            <button onclick="verCurso(${curso.cursoID})"><i class="fa-solid fa-eye"></i> Ver Asistencias</button>
+          `;
 
       cursosContainer.appendChild(cursoElement);
     });

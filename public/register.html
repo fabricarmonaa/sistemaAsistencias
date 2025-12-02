@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Sistema de Asistencias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#1976d2">
+    <link rel="stylesheet" href="css/auth-material.css">
+</head>
+<body>
+    <div class="main">
+        <div class="auth-card">
+            <header class="auth-header">
+                <span class="material-icons auth-icon">person_add</span>
+                <div class="auth-title">
+                    <h2>Registrarse <span>preceptor</span></h2>
+                    <p class="subtitle">Crea tu cuenta</p>
+                </div>
+            </header>
+
+            <form id="registerForm" class="auth-form" novalidate>
+                <div class="input-group">
+                    <span class="material-icons input-icon">person</span>
+                    <input type="text" id="usuario" name="usuario" required placeholder=" ">
+                    <label for="usuario">Usuario (DNI)</label>
+                </div>
+
+                <div class="input-group">
+                    <span class="material-icons input-icon">email</span>
+                    <input type="email" id="email" name="email" required placeholder=" ">
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="input-group">
+                    <span class="material-icons input-icon">phone</span>
+                    <input type="text" id="telefono" name="telefono" required placeholder=" ">
+                    <label for="telefono">Teléfono</label>
+                </div>
+
+                <div class="input-group">
+                    <span class="material-icons input-icon">lock</span>
+                    <input type="password" id="contrasena" name="contrasena" required placeholder=" ">
+                    <label for="contrasena">Contraseña</label>
+                </div>
+
+                <button type="submit" class="btn-primary">Registrarse</button>
+                <div id="mensaje" class="mensaje" aria-live="polite" style="display: none;"></div>
+
+                <div class="aux-links">
+                    <a href="/login.html">Ya tengo cuenta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+</html>
+</body>
+</html>
